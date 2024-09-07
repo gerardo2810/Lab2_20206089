@@ -12,7 +12,6 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-    <!-- Antena base más grande -->
     <ImageView
         android:id="@+id/ivHangmanBase"
         android:layout_width="120dp"
@@ -24,7 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Cabeza del muñeco, ajustada a la derecha -->
     <ImageView
         android:id="@+id/ivHangmanHead"
         android:layout_width="55dp"
@@ -35,7 +33,6 @@
         app:layout_constraintStart_toStartOf="@+id/ivHangmanBase"
         app:layout_constraintHorizontal_bias="1.0" />
 
-    <!-- Torso del muñeco, ajustado a la derecha -->
     <ImageView
         android:id="@+id/ivHangmanTorso"
         android:layout_width="35dp"
@@ -46,7 +43,6 @@
         app:layout_constraintStart_toStartOf="@+id/ivHangmanBase"
         app:layout_constraintHorizontal_bias="1.0" />
 
-    <!-- Brazo derecho, ajustado -->
     <ImageView
         android:id="@+id/ivHangmanArmRight"
         android:layout_width="55dp"
@@ -57,7 +53,6 @@
         app:layout_constraintStart_toStartOf="@+id/ivHangmanBase"
         app:layout_constraintHorizontal_bias="1.0" />
 
-    <!-- Brazo izquierdo, ajustado -->
     <ImageView
         android:id="@+id/ivHangmanArmLeft"
         android:layout_width="55dp"
@@ -68,7 +63,7 @@
         app:layout_constraintStart_toStartOf="@+id/ivHangmanBase"
         app:layout_constraintHorizontal_bias="1.0" />
 
-    <!-- Pierna izquierda -->
+
     <ImageView
         android:id="@+id/ivHangmanLegLeft"
         android:layout_width="55dp"
@@ -79,7 +74,6 @@
         app:layout_constraintStart_toStartOf="@+id/ivHangmanBase"
         app:layout_constraintHorizontal_bias="1.0" />
 
-    <!-- Pierna derecha -->
     <ImageView
         android:id="@+id/ivHangmanLegRight"
         android:layout_width="55dp"
@@ -101,7 +95,6 @@
         app:layout_constraintEnd_toEndOf="parent">
     </GridLayout>
 
-    <!-- Teclado con las letras en GridLayout -->
     <GridLayout
         android:id="@+id/gridLetters"
         android:layout_width="wrap_content"
@@ -112,7 +105,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Botones de letras de la A a la Z -->
         <Button
             android:id="@+id/btnA"
             android:layout_width="60dp"
@@ -339,7 +331,6 @@
 
     </GridLayout>
 
-    <!-- Mensaje de fin del juego -->
     <TextView
         android:id="@+id/endMessage"
         android:layout_width="wrap_content"
@@ -350,7 +341,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón de nuevo juego -->
     <Button
         android:id="@+id/btnNewGame"
         android:layout_width="wrap_content"

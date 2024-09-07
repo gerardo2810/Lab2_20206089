@@ -20,20 +20,16 @@ public class MainActivity extends AppCompatActivity {
         EditText etName = findViewById(R.id.etName);
         Button btnPlay = findViewById(R.id.btnPlay);
 
-        // Inicialmente, el botón "Jugar" está invisible y deshabilitado
         btnPlay.setEnabled(false);
         btnPlay.setVisibility(View.INVISIBLE);
 
-        // Listener para el campo de texto
         etName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No es necesario implementar
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Mostrar y habilitar el botón si hay texto en el campo
                 if (!s.toString().trim().isEmpty()) {
                     btnPlay.setVisibility(View.VISIBLE);
                     btnPlay.setEnabled(true);
@@ -50,12 +46,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnPlay.setOnClickListener(view -> {
-            // Obtener el texto ingresado en el campo de nombre
             String playerName = etName.getText().toString();
 
-            // Redirigir a la actividad de juego (GameActivity) y pasar el nombre del jugador
+
             Intent intent = new Intent(MainActivity.this, GameActivity.class);
-            intent.putExtra("PLAYER_NAME", playerName); // Enviar el nombre del jugador
+            intent.putExtra("PLAYER_NAME", playerName);
             startActivity(intent);
         });
     }

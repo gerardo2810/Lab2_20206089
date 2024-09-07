@@ -20,7 +20,7 @@ public class GameActivity extends AppCompatActivity {
     private char[] guessedWord;
     private int incorrectGuesses;
     private long startTime;
-    private ArrayList<String> gameResults = new ArrayList<>(); // Para almacenar los resultados
+    private ArrayList<String> gameResults = new ArrayList<>();
     private String playerName;
 
     @Override
@@ -28,23 +28,20 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        ImageView leftIcon = findViewById(R.id.left_icon);  // Flecha de retroceso
-        ImageView rightIcon = findViewById(R.id.right_icon);  // Icono de estadísticas
+        ImageView leftIcon = findViewById(R.id.left_icon);
+        ImageView rightIcon = findViewById(R.id.right_icon);
         TextView title = findViewById(R.id.toolbar_title);
 
-        // Acción al presionar la flecha (volver a MainActivity)
         leftIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Guardar resultado de juego si fue cancelado
                 addGameResult("Canceló");
                 Intent intent = new Intent(GameActivity.this, MainActivity.class);
                 startActivity(intent);
-                finish(); // Cerrar la actividad actual
+                finish();
             }
         });
 
-        // Acción al presionar el icono de estadísticas (ir a StatisticsActivity)
         rightIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,35 +51,28 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        // Obtener el nombre del jugador desde el Intent
         playerName = getIntent().getStringExtra("PLAYER_NAME");
 
-        // Configurar botones de letras
         GridLayout gridLetters = findViewById(R.id.gridLetters);
         for (int i = 0; i < gridLetters.getChildCount(); i++) {
             Button letterButton = (Button) gridLetters.getChildAt(i);
             letterButton.setOnClickListener(v -> onLetterClicked(letterButton));
         }
 
-        // Configurar botón de nuevo juego
         Button btnNewGame = findViewById(R.id.btnNewGame);
         btnNewGame.setOnClickListener(v -> {
             addGameResult("Canceló");
             startNewGame();
         });
 
-        // Iniciar el primer juego
         startNewGame();
     }
 
     private void startNewGame() {
-        // Reiniciar el estado del juego
         incorrectGuesses = 0;
 
-        // Ocultar todas las partes del cuerpo del muñeco
         resetHangmanImage();
 
-        // Seleccionar una palabra aleatoria
         Random random = new Random();
         selectedWord = words[random.nextInt(words.length)];
         guessedWord = new char[selectedWord.length()];
@@ -90,42 +80,38 @@ public class GameActivity extends AppCompatActivity {
             guessedWord[i] = '_';
         }
 
-        // Actualizar la vista de las letras
         updateWordDisplay();
 
-        // Habilitar todos los botones de letras
         GridLayout gridLetters = findViewById(R.id.gridLetters);
         for (int i = 0; i < gridLetters.getChildCount(); i++) {
             Button letterButton = (Button) gridLetters.getChildAt(i);
             letterButton.setEnabled(true);
         }
 
-        // Iniciar cronómetro
         startTime = System.currentTimeMillis();
     }
 
-    // Método para ocultar todas las partes del cuerpo del muñeco
     private void resetHangmanImage() {
-        findViewById(R.id.ivHangmanHead).setVisibility(View.INVISIBLE);  // Ocultar cabeza
-        findViewById(R.id.ivHangmanTorso).setVisibility(View.INVISIBLE);  // Ocultar torso
-        findViewById(R.id.ivHangmanArmRight).setVisibility(View.INVISIBLE);  // Ocultar brazo derecho
-        findViewById(R.id.ivHangmanArmLeft).setVisibility(View.INVISIBLE);  // Ocultar brazo izquierdo
-        findViewById(R.id.ivHangmanLegLeft).setVisibility(View.INVISIBLE);  // Ocultar pierna izquierda
-        findViewById(R.id.ivHangmanLegRight).setVisibility(View.INVISIBLE);  // Ocultar pierna derecha
+        findViewById(R.id.ivHangmanHead).setVisibility(View.INVISIBLE);
+        findViewById(R.id.ivHangmanTorso).setVisibility(View.INVISIBLE);
+        findViewById(R.id.ivHangmanArmRight).setVisibility(View.INVISIBLE);
+        findViewById(R.id.ivHangmanArmLeft).setVisibility(View.INVISIBLE);
+        findViewById(R.id.ivHangmanLegLeft).setVisibility(View.INVISIBLE);
+        findViewById(R.id.ivHangmanLegRight).setVisibility(View.INVISIBLE);
     }
 
     private void updateWordDisplay() {
         GridLayout gridLines = findViewById(R.id.gridLines);
-        gridLines.removeAllViews();  // Limpiar vistas previas, si existen
+        gridLines.removeAllViews();
 
         for (int i = 0; i < guessedWord.length; i++) {
             TextView letterView = new TextView(this);
             letterView.setText(String.valueOf(guessedWord[i]));
-            letterView.setTextSize(36);  // Ajusta el tamaño de letra
+            letterView.setTextSize(36);
             letterView.setGravity(View.TEXT_ALIGNMENT_CENTER);
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.setMargins(8, 8, 8, 8);  // Margen entre letras
+            params.setMargins(8, 8, 8, 8);
             letterView.setLayoutParams(params);
 
             gridLines.addView(letterView);
@@ -136,7 +122,7 @@ public class GameActivity extends AppCompatActivity {
         char letter = letterButton.getText().toString().charAt(0);
         boolean correctGuess = false;
 
-        letterButton.setEnabled(false);  // Deshabilitar el botón seleccionado
+        letterButton.setEnabled(false);
 
         for (int i = 0; i < selectedWord.length(); i++) {
             if (selectedWord.charAt(i) == letter) {
@@ -158,22 +144,22 @@ public class GameActivity extends AppCompatActivity {
     private void updateHangmanImage() {
         switch (incorrectGuesses) {
             case 1:
-                findViewById(R.id.ivHangmanHead).setVisibility(View.VISIBLE); // Mostrar cabeza
+                findViewById(R.id.ivHangmanHead).setVisibility(View.VISIBLE);
                 break;
             case 2:
-                findViewById(R.id.ivHangmanTorso).setVisibility(View.VISIBLE); // Mostrar torso
+                findViewById(R.id.ivHangmanTorso).setVisibility(View.VISIBLE);
                 break;
             case 3:
-                findViewById(R.id.ivHangmanArmRight).setVisibility(View.VISIBLE); // Mostrar brazo derecho
+                findViewById(R.id.ivHangmanArmRight).setVisibility(View.VISIBLE);
                 break;
             case 4:
-                findViewById(R.id.ivHangmanArmLeft).setVisibility(View.VISIBLE); // Mostrar brazo izquierdo
+                findViewById(R.id.ivHangmanArmLeft).setVisibility(View.VISIBLE);
                 break;
             case 5:
-                findViewById(R.id.ivHangmanLegLeft).setVisibility(View.VISIBLE); // Mostrar pierna izquierda
+                findViewById(R.id.ivHangmanLegLeft).setVisibility(View.VISIBLE);
                 break;
             case 6:
-                findViewById(R.id.ivHangmanLegRight).setVisibility(View.VISIBLE); // Mostrar pierna derecha
+                findViewById(R.id.ivHangmanLegRight).setVisibility(View.VISIBLE);
                 break;
         }
     }
